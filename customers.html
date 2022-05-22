@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlatnetFitness Table</title>
+    
+</head>
+<script src="./js/form.js"></script>
+<body>
+    [ 
+    <a href="Customers.HTML">Customers</a>       | 
+    <a href="Schedules.html">Schedules</a>       |
+    <a href="Locations.html">Locations</a>       |
+    <a href="Inventories.html">Inventories</a>   |  
+    <a href="Equipment.html">Equipment</a>       |
+    <a href="Trainers.html">Trainers</a>         |
+    <a href="Transactions.html">Transactions</a> |
+    ]
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" id="customertable">
+            <caption>
+                <h1>Customer Table</h1>
+                <a href="#" onClick="newCustomer()">New</a> |
+                <p></p>
+            </caption>
+                
+                <thead>
+                <tr>
+                    <th>customerID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Pronouns</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Membership Type</th>
+                    <th>Active Membership</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr id="data">
+                    
+                </tr>
+                </thead>
+                <tbody id="customerTable">
+                
+                </tbody>
+            </table>
+    </div>
+
+    <div id="insert">
+        <form method="POST" id="addCustomer">
+            <legend><strong>Add Customer</strong></legend>
+              <fieldset class="fields">
+                
+                <label> first name </label> <input type="text" name="fname">
+                <label> last name </label> <input type="text" name="lname">
+                <label> pronouns </label> <select name="pronouns">
+                    <option value="0">&nbsp;</option>
+                    <option value="he/him">he/him</option>
+                    <option value="she/her">she/her</option>
+                    <option value="they/them">they/them</option>
+                    </select>
+                <label> age </label> <input type="text" name="age">
+                <label>customerAddress</label> <input type="text" name="customerAddress">
+                <label>email</label><input type="text" name="email">
+                <label>membershipType</label><select name="membershipType">
+                    <option value="Executive">Executive</option>
+                    <option value="Pro">Pro</option>
+                    <option value="Basic">Basic</option>
+                    </select>
+                <label>hasActiveMembership</label><select name="hasActiveMembership">
+                    <option value="0">true</option>
+                    <option value="1">false</option>
+                    </select>
+          </fieldset>
+              <input class="btn" type="submit" id="addCustomer" value="Add Customer">
+              <input class="btn" type="button" value="cancel" onClick="browseCustomers()">
+        </form> 
+    </div><!-- insert -->
+
+    <!-- update -->
+
+</body>
+
+<script src="./js/index.js"></script>
+
+</html>
