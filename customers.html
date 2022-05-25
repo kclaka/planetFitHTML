@@ -22,7 +22,7 @@
         <div class="d-flex bd-highlight mb-3">
           <div class="me-auto p-2 bd-highlight"><h2>Customers</div>
           <div class="p-2 bd-highlight col text-center" >
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#customerModal">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#customerModal" onclick="postCustomer()">
                 Add new Customer</button>
           </div>
         </div>
@@ -46,13 +46,13 @@
                             <input type="text" class="form-control" id="lname" name="lname">
                           </div>
                         <div class="col-md-4">
-                        <label for="pronouns" class="form-label">Pronouns</label>
-                        <select id="pronouns" class="form-select" name="pronouns">
-                            <option selected>Choose...</option>
-                            <option value="he/him">he/him</option>
-                            <option value="she/her">she/her</option>
-                            <option value="they/them">they/them</option>
-                        </select>
+                            <label for="pronouns" class="form-label">Pronouns</label>
+                            <select id="pronouns" class="form-select" name="pronouns">
+                                <option selected>Choose...</option>
+                                <option value="he/him">he/him</option>
+                                <option value="she/her">she/her</option>
+                                <option value="they/them">they/them</option>
+                            </select>
                         </div>
                         <div class="col-md-2">
                             <label for="age" class="form-label">Age</label>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="addCustomer"> Submit</button>
+                            <button type="submit" class="btn btn-primary" id="submit"> Submit</button>
                         </div>
                     </form>
 
@@ -96,6 +96,8 @@
             </div>
             </div>
         </div>
+
+        
         
         
 
