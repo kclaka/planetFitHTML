@@ -93,13 +93,33 @@ const updateTableContent = (entity_id) => {
     
 }
 
+console.log(selected_user)
+
 const deleteTableContent = (entity_id) => {
-    console.log(`Deleted Entity with ID ${entity_id}`)
+    console.log(entity_id)
+    customerForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        
+        const formData = new FormData(customerForm).entries()
+        console.log(formData)
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/customers/${entity_id[0]}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            //body: JSON.stringify(Object.fromEntries(formData))
+        });
+    
+        const result = await response.json();
+        console.log(result)
+    
+        const modalElement = document.getElementById("customerModal");
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+        document.getElementById("addCustomer").reset()
+        
+    });
 }
 
-const closeUserModal = () => {
-    
-}
+
 
 
 
