@@ -95,7 +95,7 @@ const updateTableContent = (entity_id) => {
 
 const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
-    if (confirm(`Are you sure you want delete transaction ${entity_id[0]} ?`)) {
+    if (confirm(`Are you sure you want delete ${entity_id[1]} from Trainers table ?`)) {
         // Save it!
         const response = await fetch(`https://planetfitapi.azurewebsites.net/api/trainers/${entity_id[0]}`, {
             method:'DELETE',
