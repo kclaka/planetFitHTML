@@ -7,6 +7,8 @@ const test = document.getElementById('customerform');
 
 
 
+
+
 const updateTransactionTime = () => {
     var date = new Date();
     const transactionDateField = document.getElementById("transactionDate")
@@ -78,18 +80,15 @@ const buildTable = function(tableID, data) {
 }
 
 const updateTableContent = (entity_id) => {
-    document.getElementById('fname').value = entity_id[1];
-    document.getElementById('lname').value = entity_id[2];
-    document.getElementById('pronouns').value = entity_id[3];
-    document.getElementById('age').value = entity_id[4];
-    document.getElementById('customerAddress').value = entity_id[5];
-    document.getElementById('email').value = entity_id[6];
-    document.getElementById('membershipType').value = entity_id[7];
-    document.getElementById('hasActiveMembership').value = entity_id[8];
+    document.getElementById('CustomerID').value = entity_id[1];
+    document.getElementById('amount').value = entity_id[2];
+    document.getElementById('transactionDate').value = entity_id[3];
+    
 
     CRUDbutton.innerHTML = "Update"
 
     selected_user = entity_id[0]
+    console.log(selected_user)
     console.log(selected_user)
 
     customerForm.addEventListener('submit', async function (e) {
@@ -97,7 +96,7 @@ const updateTableContent = (entity_id) => {
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/customers/${selected_user}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/transactions/${selected_user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -111,7 +110,7 @@ const updateTableContent = (entity_id) => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addCustomer").reset()
-        location.reload()
+        //location.reload()
         
     });
     
@@ -122,9 +121,9 @@ const updateTableContent = (entity_id) => {
 
 const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
-    if (confirm(`Are you sure you want delete ${entity_id[1]} ${entity_id[2]} from the Customers table`)) {
+    if (confirm(`Are you sure you want delete transaction ${entity_id[0]} ?`)) {
         // Save it!
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/customers/${entity_id[0]}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/transactions/${entity_id[0]}`, {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' }
             //body: JSON.stringify(Object.fromEntries(formData))
