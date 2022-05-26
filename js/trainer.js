@@ -1,41 +1,13 @@
 const customerTable = document.getElementById("customertable")
 const customerForm = document.getElementById('addCustomer');
 const CRUDbutton = document.getElementById('submit');
-const customerlist = document.getElementById("CustomerID")
-
-const test = document.getElementById('customerform');
 
 
 
 
 
-const updateTransactionTime = () => {
-    var date = new Date();
-    const transactionDateField = document.getElementById("transactionDate")
-    transactionDateField.value = date.toISOString()
-}
 
-fetch(`https://planetfitapi.azurewebsites.net/api/customers`, {
-        "mode":"cors"
-    }).then(function(response) {
-          if(response.ok){
-              response.json().then(function(data){
-                updateCustomer(data)
-              })
-          }else{
-              console.log(response.statusText)
-              console.log("Not working!!")
-          }
-})
 
-const updateCustomer = (data) => {
-    for(value of data){
-        let option = document.createElement("option")
-        option.value = value["customerID"]
-        option.innerHTML = value["fname"] + " " + value["lname"] 
-        customerlist.append(option)
-    }
-}
 
 let selected_user = null
 
@@ -54,6 +26,7 @@ const buildTable = function(tableID, data) {
         }
 
         let entity_id = Object.values(values);
+        
         let newCell = newRow.insertCell();
         let edit = document.createElement("button")
         edit.type = "button"
@@ -80,9 +53,10 @@ const buildTable = function(tableID, data) {
 }
 
 const updateTableContent = (entity_id) => {
-    document.getElementById('CustomerID').value = entity_id[1];
-    document.getElementById('amount').value = entity_id[2];
-    document.getElementById('transactionDate').value = entity_id[3];
+    console.log(entity_id)
+    document.getElementById('trainerName').value = entity_id[1];
+    document.getElementById('salary').value = entity_id[2];
+    document.getElementById('email').value = entity_id[3];
     
 
     CRUDbutton.innerHTML = "Update"
@@ -96,7 +70,7 @@ const updateTableContent = (entity_id) => {
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/transactions/${selected_user}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/trainers/${selected_user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -110,7 +84,7 @@ const updateTableContent = (entity_id) => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addCustomer").reset()
-        //location.reload()
+        location.reload()
         
     });
     
@@ -123,7 +97,7 @@ const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
     if (confirm(`Are you sure you want delete transaction ${entity_id[0]} ?`)) {
         // Save it!
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/transactions/${entity_id[0]}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/trainers/${entity_id[0]}`, {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' }
             //body: JSON.stringify(Object.fromEntries(formData))
@@ -171,7 +145,7 @@ const postCustomer = () => {
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch('https://planetfitapi.azurewebsites.net/api/transactions', {
+        const response = await fetch('https://planetfitapi.azurewebsites.net/api/trainers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -198,6 +172,6 @@ const postCustomer = () => {
 
 
 customerData = fetchData("trainers")
-updateTransactionTime()
+
 
 
