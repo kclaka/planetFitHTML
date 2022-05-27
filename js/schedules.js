@@ -2,31 +2,69 @@ const customerTable = document.getElementById("customertable")
 const customerForm = document.getElementById('addCustomer');
 const CRUDbutton = document.getElementById('submit');
 
-const test = document.getElementById('customerform');
+var trainername;
+
+async function fetchEntityById(id, entity) {
+    try {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/${entity}/${id}`, {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+  
+  
+
+
+
+
+
+
+
 
 let selected_user = null
 
 const buildTable = function(tableID, data) {
+    
     
     for(var values of data){
         let newRow = tableID.insertRow();
         for(key in values){
             
             let newCell = newRow.insertCell()
-            let newText = document.createTextNode(values[key])
             
-            if(newText.textContent === "0" && key == "hasActiveMembership" ){
-                newText = document.createTextNode("false")
+            let newText = document.createTextNode(values[key])
+
+            if(key == "trainerID"){
+               
                 
-            }else if(newText.textContent === "1" && key == "hasActiveMembership" ){
-                newText = document.createTextNode("true")
+                
+                
+
+                
+
+               
+                
+                 
+                
             }
+
+
+            
+            
             
             newCell.appendChild(newText);
 
         }
 
         let entity_id = Object.values(values);
+        
         let newCell = newRow.insertCell();
         let edit = document.createElement("button")
         edit.type = "button"
@@ -53,26 +91,23 @@ const buildTable = function(tableID, data) {
 }
 
 const updateTableContent = (entity_id) => {
-    document.getElementById('fname').value = entity_id[1];
-    document.getElementById('lname').value = entity_id[2];
-    document.getElementById('pronouns').value = entity_id[3];
-    document.getElementById('age').value = entity_id[4];
-    document.getElementById('customerAddress').value = entity_id[5];
-    document.getElementById('email').value = entity_id[6];
-    document.getElementById('membershipType').value = entity_id[7];
-    document.getElementById('hasActiveMembership').value = entity_id[8];
+    document.getElementById('locationAddress').value = entity_id[1];
+    document.getElementById('manager').value = entity_id[2];
+  
+    
 
     CRUDbutton.innerHTML = "Update"
 
     selected_user = entity_id[0]
     console.log(selected_user)
+    
 
     customerForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/customers/${selected_user}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/locations/${selected_user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -97,9 +132,9 @@ const updateTableContent = (entity_id) => {
 
 const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
-    if (confirm(`Are you sure you want delete ${entity_id[1]} ${entity_id[2]} from the Customers table`)) {
+    if (confirm(`Are you sure you want delete ${entity_id[1]} from Equipment table ?`)) {
         // Save it!
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/customers/${entity_id[0]}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/locations/${entity_id[0]}`, {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' }
             //body: JSON.stringify(Object.fromEntries(formData))
@@ -142,16 +177,19 @@ const fetchData = function(entity) {
 const postCustomer = () => {
     customerForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch('https://planetfitapi.azurewebsites.net/api/customers', {
+        const response = await fetch('https://planetfitapi.azurewebsites.net/api/locations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
         });
     
         const result = await response.json();
+        console.log(result)
     
         const modalElement = document.getElementById("customerModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
@@ -170,4 +208,7 @@ const postCustomer = () => {
 
 
 
-customerData = fetchData("customers")
+customerData = fetchData("schedules")
+
+
+
