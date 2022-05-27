@@ -1,26 +1,20 @@
 const customerTable = document.getElementById("customertable")
 const customerForm = document.getElementById('addCustomer');
 const CRUDbutton = document.getElementById('submit');
+const trainerOptions = document.getElementById('trainerID')
+const locationOptions = document.getElementById('locationID')
 
 var trainername;
+var newText;
 
-async function fetchEntityById(id, entity) {
-    try {
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/${entity}/${id}`, {
-            method: 'GET',
-            credentials: 'same-origin'
-        });
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
+
+
+  
+  
+const trainerInfo = (data1, data2) => {
+    newText = document.createTextNode("kenny")
+    return newText
 }
-
-
-  
-  
-
 
 
 
@@ -38,22 +32,30 @@ const buildTable = function(tableID, data) {
         for(key in values){
             
             let newCell = newRow.insertCell()
+             newText = document.createTextNode(values[key])
             
-            let newText = document.createTextNode(values[key])
 
             if(key == "trainerID"){
-               
-                
-                
-                
+                async function loadNames() {
+                    const response = await fetch(`https://planetfitapi.azurewebsites.net/api/trainers/${values[key]}`);
+                    const trainer = await response.json();
+                    return trainer
+                    
+                  }
 
-                
-
-               
-                
+                  loadNames().then(data =>{
+                    trainerInfo(data, values[key])
+                  }) 
                  
                 
+            }else{
+               console.log(2) 
             }
+
+            
+
+
+            
 
 
             
@@ -91,8 +93,13 @@ const buildTable = function(tableID, data) {
 }
 
 const updateTableContent = (entity_id) => {
-    document.getElementById('locationAddress').value = entity_id[1];
-    document.getElementById('manager').value = entity_id[2];
+    console.log(entity_id)
+    document.getElementById('trainerID').value = entity_id[1];
+    document.getElementById('activity').value = entity_id[2];
+    document.getElementById('activityDays').value = entity_id[3];
+    document.getElementById('startTime').value = entity_id[4];
+    document.getElementById('duration').value = entity_id[5];
+    document.getElementById('locationID').value = entity_id[6];
   
     
 
@@ -107,7 +114,7 @@ const updateTableContent = (entity_id) => {
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/locations/${selected_user}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/schedules/${selected_user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -132,9 +139,9 @@ const updateTableContent = (entity_id) => {
 
 const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
-    if (confirm(`Are you sure you want delete ${entity_id[1]} from Equipment table ?`)) {
+    if (confirm(`Are you sure you want delete ${entity_id[3]} from Activity table ?`)) {
         // Save it!
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/locations/${entity_id[0]}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/schedules/${entity_id[0]}`, {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' }
             //body: JSON.stringify(Object.fromEntries(formData))
@@ -182,7 +189,7 @@ const postCustomer = () => {
         
         const formData = new FormData(customerForm).entries()
         console.log(formData)
-        const response = await fetch('https://planetfitapi.azurewebsites.net/api/locations', {
+        const response = await fetch('https://planetfitapi.azurewebsites.net/api/schedules', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -199,6 +206,53 @@ const postCustomer = () => {
         
     });
 }
+
+fetch(`https://planetfitapi.azurewebsites.net/api/trainers`, {
+        "mode":"cors"
+    }).then(function(response) {
+          if(response.ok){
+              response.json().then(function(data){
+                populateExcerciseForms(data)
+              })
+          }else{
+              console.log(response.statusText)
+              console.log("Not working!!")
+          }
+    })
+
+    const populateExcerciseForms = (data) => {
+        console.log(data[0])
+        for(value of data){
+            let option = document.createElement("option")
+            option.value = value["trainerID"]
+            option.innerHTML = value["trainerName"]
+            trainerOptions.append(option)
+        }
+    }
+
+
+    fetch(`https://planetfitapi.azurewebsites.net/api/locations`, {
+        "mode":"cors"
+    }).then(function(response) {
+          if(response.ok){
+              response.json().then(function(data){
+                populateLocation(data)
+              })
+          }else{
+              console.log(response.statusText)
+              console.log("Not working!!")
+          }
+    })
+
+    const populateLocation = (data) => {
+        console.log(data[0])
+        for(value of data){
+            let option = document.createElement("option")
+            option.value = value["locationID"]
+            option.innerHTML = value["locationAddress"]
+            locationOptions.append(option)
+        }
+    }
 
 
 

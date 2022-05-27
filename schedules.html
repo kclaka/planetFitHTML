@@ -59,20 +59,44 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Update Location</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Add Schedule</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row g-3" method="POST" id="addCustomer">
-                        <div class="col-md-6">
-                            <label for="locationAddress" class="form-label">Location Address</label>
-                            <input type="text" class="form-control" id="locationAddress" name="locationAddress">
+                        <div class="col-md-4">
+                            <label for="trainerID" class="form-label">Trainer</label>
+                            <select id="trainerID" class="form-select" name="trainerID">
+                                <option selected>Choose...</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="locationID" class="form-label">Location</label>
+                            <select id="locationID" class="form-select" name="locationID">
+                                <option selected>Choose...</option>
+                            </select>
                         </div>
                         
     
                         <div class="col-md-6">
-                            <label for="manager" class="form-label">Manager</label>
-                            <input type="text" class="form-control" id="manager" name="manager">
+                            <label for="activity" class="form-label">Activity</label>
+                            <input type="text" class="form-control" id="activity" name="activity">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="activityDays" class="form-label">Activity Days</label>
+                            <input type="text" class="form-control" id="activityDays" name="activityDays">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="startTime" class="form-label">Start Time</label>
+                            <input type="text" class="form-control" id="startTime" name="startTime">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="duration" class="form-label">Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
