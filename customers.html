@@ -42,7 +42,8 @@
                     <a class="nav-link" href="inventories.html">Inventories</a>
                 </li>
               </ul>
-          
+              <div>
+              
         </div>
     </nav>
       <div class="container">
@@ -52,7 +53,13 @@
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#customerModal" onclick="postCustomer()">
                 Add new Customer</button>
           </div>
+          
+          
+          
         </div>
+        
+        
+      
 
         <!-- Modal -->
         <div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -61,7 +68,12 @@
                 <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Add New Customer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            </div>
+
+           
+
+            
+                
                 <div class="modal-body">
                     <form class="row g-3" method="POST" id="addCustomer">
                         <div class="col-md-6">
@@ -129,6 +141,10 @@
         
 
         <div class="table-responsive">
+            <div class="form-outline mb-4 w-75 p-3">
+                <input type="search" class="form-control" id="datatable-search-input">
+                <label class="form-label" for="datatable-search-input"><button class="btn btn-dark">Search</button></label>
+            </div>
             <table id="customertable">
                 <thead>
                     <tr>

@@ -136,6 +136,7 @@ const addNewInvetory = () => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addInventory").reset()
+        location.reload()
         
     });
 }

@@ -110,7 +110,7 @@ const updateTableContent = (entity_id) => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addCustomer").reset()
-        //location.reload()
+        location.reload()
         
     });
     
