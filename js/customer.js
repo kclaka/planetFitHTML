@@ -152,6 +152,7 @@ const postCustomer = () => {
         });
     
         const result = await response.json();
+        
     
         const modalElement = document.getElementById("customerModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
