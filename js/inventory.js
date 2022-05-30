@@ -1,4 +1,4 @@
-const inventoryTable = document.getElementById("inventoryTable")
+const inventoryTable = document.getElementById("customertable")
 const InventoryForm = document.getElementById('addInventory');
 const CRUDbutton = document.getElementById('submit');
 const locationOptions = document.getElementById("location")
@@ -136,7 +136,7 @@ const addNewInvetory = () => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addInventory").reset()
-        location.reload()
+        //location.reload()
         
     });
 }
