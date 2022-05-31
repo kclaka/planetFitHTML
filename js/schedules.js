@@ -24,42 +24,30 @@ const trainerInfo = (data1, data2) => {
 
 let selected_user = null
 
-const buildTable = function(tableID, data) {
+const buildTable = async function(tableID, data) {
     
     
     for(var values of data){
+        
+        let url = `https://planetfitapi.azurewebsites.net/api/locations/${values["locationID"]}`
+        let response = await fetch(url);
+        values["locationID"] = await response.json()
+        
+
+        values["locationID"] = values["locationID"][0]["locationAddress"] 
+
+        let trainerurl = `https://planetfitapi.azurewebsites.net/api/trainers/${values["trainerID"]}`
+        
+        let response2 = await fetch(trainerurl);
+        values["trainerID"] = await response2.json()
+        values["trainerID"] = values["trainerID"][0]["trainerName"]
+
         let newRow = tableID.insertRow();
         for(key in values){
             
             let newCell = newRow.insertCell()
              newText = document.createTextNode(values[key])
-            
 
-            if(key == "trainerID"){
-                async function loadNames() {
-                    const response = await fetch(`https://planetfitapi.azurewebsites.net/api/trainers/${values[key]}`);
-                    const trainer = await response.json();
-                    return trainer
-                    
-                  }
-
-                  loadNames().then(data =>{
-                    trainerInfo(data, values[key])
-                  }) 
-                 
-                
-            }else{
-               console.log(2) 
-            }
-
-            
-
-
-            
-
-
-            
-            
             
             newCell.appendChild(newText);
 
@@ -221,7 +209,6 @@ fetch(`https://planetfitapi.azurewebsites.net/api/trainers`, {
     })
 
     const populateExcerciseForms = (data) => {
-        console.log(data[0])
         for(value of data){
             let option = document.createElement("option")
             option.value = value["trainerID"]
@@ -245,7 +232,6 @@ fetch(`https://planetfitapi.azurewebsites.net/api/trainers`, {
     })
 
     const populateLocation = (data) => {
-        console.log(data[0])
         for(value of data){
             let option = document.createElement("option")
             option.value = value["locationID"]

@@ -42,7 +42,6 @@ let selected_user = null
 const buildTable = async function(tableID, data) {
     
     for(var values of data){
-        var name = ""
         let url = `https://planetfitapi.azurewebsites.net/api/customers/${values["CustomerID"]}`
         let response = await fetch(url);
         values["CustomerID"] = await response.json()
