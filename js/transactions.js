@@ -48,7 +48,7 @@ const buildTable = async function(tableID, data) {
         values["CustomerID"] = await response.json()
 
         values["CustomerID"] = values["CustomerID"][0]["fname"] + " " + values["CustomerID"][0]["lname"]
-
+        values["amount"] = parseFloat(values["amount"]).toFixed(2)
         
         
         
