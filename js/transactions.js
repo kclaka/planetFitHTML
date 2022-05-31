@@ -39,14 +39,26 @@ const updateCustomer = (data) => {
 
 let selected_user = null
 
-const buildTable = function(tableID, data) {
+const buildTable = async function(tableID, data) {
     
     for(var values of data){
+        var name = ""
+        let url = `https://planetfitapi.azurewebsites.net/api/customers/${values["CustomerID"]}`
+        let response = await fetch(url);
+        values["CustomerID"] = await response.json()
+
+        values["CustomerID"] = values["CustomerID"][0]["fname"] + " " + values["CustomerID"][0]["lname"]
+
+        
+        
+        
+        
         let newRow = tableID.insertRow();
         for(key in values){
             
             let newCell = newRow.insertCell()
-            let newText = document.createTextNode(values[key])
+            var newText = document.createTextNode(values[key])
+            
             
             
             newCell.appendChild(newText);
