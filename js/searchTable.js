@@ -7,7 +7,7 @@ function searchTable() {
     tr = table.getElementsByTagName("tr");
   
     // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
+    for (i = 1; i < tr.length; i++) {
       td = tr[i];
       if (td) {
         txtValue = td.textContent || td.innerText;
