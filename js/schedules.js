@@ -29,18 +29,18 @@ const buildTable = async function(tableID, data) {
     
     for(var values of data){
         
-        let url = `https://planetfitapi.azurewebsites.net/api/locations/${values["locationID"]}`
-        let response = await fetch(url);
-        values["locationID"] = await response.json()
+        // let url = `https://planetfitapi.azurewebsites.net/api/locations/${values["locationID"]}`
+        // let response = await fetch(url);
+        // values["locationID"] = await response.json()
         
 
-        values["locationID"] = values["locationID"][0]["locationAddress"] 
+        // values["locationID"] = values["locationID"][0]["locationAddress"] 
 
-        let trainerurl = `https://planetfitapi.azurewebsites.net/api/trainers/${values["trainerID"]}`
+        // let trainerurl = `https://planetfitapi.azurewebsites.net/api/trainers/${values["trainerID"]}`
         
-        let response2 = await fetch(trainerurl);
-        values["trainerID"] = await response2.json()
-        values["trainerID"] = values["trainerID"][0]["trainerName"]
+        // let response2 = await fetch(trainerurl);
+        // values["trainerID"] = await response2.json()
+        // values["trainerID"] = values["trainerID"][0]["trainerName"]
 
         let newRow = tableID.insertRow();
         for(key in values){
