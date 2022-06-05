@@ -10,15 +10,20 @@ const test = document.getElementById('customerform');
 let selected_user = null
 
 const buildTable = function(tableID, data) {
+    //console.log(data)
     
     for(var values of data){
         let newRow = tableID.insertRow();
         for(key in values){
+     
+            if(key !== "locationID" && key !== "equipmentID"){
+                let newCell = newRow.insertCell()
+                let newText = document.createTextNode(values[key])
             
-            let newCell = newRow.insertCell()
-            let newText = document.createTextNode(values[key])
+                newCell.appendChild(newText);
+            }
             
-            newCell.appendChild(newText);
+            
 
         }
 
@@ -49,22 +54,26 @@ const buildTable = function(tableID, data) {
 }
 
 const updateTableContent = (entity_id) => {
+    console.log(entity_id)
     
-    console.log(document.getElementById("locationValue").innerText)
-    CRUDbutton.innerHTML = "Update"
-    document.getElementById("locationValue").innerText = entity_id[0]
+    document.getElementById('location').selectedOptions[0].text = entity_id[2];
+    document.getElementById('location').setAttribute("disabled", "true")
+    document.getElementById('equipmentQuantity').value = entity_id[6];
+    document.getElementById('equipment').selectedOptions[0].text = entity_id[4];
+    document.getElementById('equipment').setAttribute("disabled", "true")
 
     
 
     
-    console.log(selected_user)
+    let selected_locationID = entity_id[0]
+    let selected_equipmentID = entity_id[1]
 
     InventoryForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         
         const formData = new FormData(InventoryForm).entries()
         console.log(formData)
-        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/updateInventory/${selected_user}`, {
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/inventory/${selected_locationID}/${selected_equipmentID}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(formData))
@@ -78,6 +87,7 @@ const updateTableContent = (entity_id) => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addInventory").reset()
+        location.reload()
         
     });
     
@@ -85,8 +95,31 @@ const updateTableContent = (entity_id) => {
     
 }
 
-const deleteTableContent = (entity_id) => {
-    console.log(`Deleted Entity with ID ${entity_id}`)
+const onClose = function(){
+    const modalElement = document.getElementById("customerModal");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+  
+    document.getElementById("addCustomer").reset()
+
+}
+
+const deleteTableContent = async (entity_id) => {
+ 
+    if (confirm(`Are you sure you want delete ${entity_id[4]} equipment from ${entity_id[2]} inventory?`)) {
+        // Save it!
+        const response = await fetch(`https://planetfitapi.azurewebsites.net/api/inventory/${entity_id[0]}/${entity_id[1]}`, {
+            method:'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+            //body: JSON.stringify(Object.fromEntries(formData))
+        });
+      } 
+    
+
+
+    
+    document.getElementById("addInventory").reset()
+    location.reload()
 }
 
 
@@ -136,7 +169,7 @@ const addNewInvetory = () => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addInventory").reset()
-        //location.reload()
+        location.reload()
         
     });
 }

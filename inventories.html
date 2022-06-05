@@ -79,11 +79,11 @@
                         </div>
                         <div class="col-md-2">
                             <label for="equipmentQuantity" class="form-label">Quantity</label>
-                            <input type="number" class="form-control" id="equipmentQuantity" name="equipmentQuantity">
+                            <input type="number" min="1" class="form-control" id="equipmentQuantity" name="equipmentQuantity">
                         </div>
         
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="onClose()">Close</button>
                             <button type="submit" class="btn btn-primary" id="submit"> Submit</button>
                         </div>
                     </form>
