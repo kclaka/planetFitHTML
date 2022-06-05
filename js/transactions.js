@@ -90,8 +90,21 @@ const buildTable = async function(tableID, data) {
     
 }
 
+const onClose = function(){
+    const modalElement = document.getElementById("customerModal");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+        
+    document.getElementById('CustomerID').removeAttribute("disabled")
+    document.getElementById('CustomerID').selectedOptions[0].text = "Choose From"
+    
+    document.getElementById("addCustomer").reset()
+    updateTransactionTime()
+}
+
 const updateTableContent = (entity_id) => {
-    document.getElementById('CustomerID').value = entity_id[1];
+    document.getElementById('CustomerID').selectedOptions[0].text = entity_id[1];
+    document.getElementById('CustomerID').setAttribute("disabled", "true")
     document.getElementById('amount').value = entity_id[2];
     document.getElementById('transactionDate').value = entity_id[3];
     
@@ -99,8 +112,9 @@ const updateTableContent = (entity_id) => {
     CRUDbutton.innerHTML = "Update"
 
     selected_user = entity_id[0]
-    console.log(selected_user)
-    console.log(selected_user)
+    
+
+   
 
     customerForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -120,12 +134,17 @@ const updateTableContent = (entity_id) => {
         const modalElement = document.getElementById("customerModal");
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
+    
         document.getElementById("addCustomer").reset()
         location.reload()
+
+        
         
     });
-    
 
+    
+    
+    
     
 }
 

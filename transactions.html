@@ -70,9 +70,9 @@
                                 <option selected>Choose...</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="amount" class="form-label">Amount</label>
-                            <input type="number" step="0.001" class="form-control" id="amount" name="amount" min="0">
+                            <input type="number" step="0.1" class="form-control" id="amount" name="amount" min="0">
                           </div>
                         
                         <div class="col-md-6">
@@ -80,7 +80,7 @@
                             <input type="datetime" class="form-control" id="transactionDate" name="transactionDate">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="onClose()">Close</button>
                             <button type="submit" class="btn btn-primary" id="submit"> Submit</button>
                         </div>
                     </form>
