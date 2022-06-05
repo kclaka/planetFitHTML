@@ -52,6 +52,15 @@ const buildTable = function(tableID, data) {
     
 }
 
+const onClose = function(){
+    const modalElement = document.getElementById("customerModal");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+  
+    document.getElementById("addCustomer").reset()
+
+}
+
 const updateTableContent = (entity_id) => {
     document.getElementById('fname').value = entity_id[1];
     document.getElementById('lname').value = entity_id[2];

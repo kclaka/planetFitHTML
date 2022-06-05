@@ -147,7 +147,14 @@ const deleteTableContent = async (entity_id) => {
 }
 
 
+const onClose = function(){
+    const modalElement = document.getElementById("customerModal");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+  
+    document.getElementById("addCustomer").reset()
 
+}
 
 
 

@@ -92,6 +92,15 @@ const updateTableContent = (entity_id) => {
     
 }
 
+const onClose = function(){
+    const modalElement = document.getElementById("customerModal");
+    const modal = bootstrap.Modal.getInstance(modalElement);
+    modal.hide();
+  
+    document.getElementById("addCustomer").reset()
+
+}
+
 
 const deleteTableContent = async (entity_id) => {
     console.log(entity_id[0])
