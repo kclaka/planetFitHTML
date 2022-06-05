@@ -16,6 +16,13 @@ th,
     color: red;
   }
 
+  img {
+    position: absolute;
+    width: 1900px;
+    height: auto;
+    
+  }
+
   
 
 
