@@ -195,7 +195,7 @@ const postCustomer = () => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addCustomer").reset()
-        //location.reload()
+        location.reload()
         
     });
 }
