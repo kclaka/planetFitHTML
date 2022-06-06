@@ -9,19 +9,6 @@ var newText;
 
 
 
-  
-  
-const trainerInfo = (data1, data2) => {
-    newText = document.createTextNode("kenny")
-    return newText
-}
-
-
-
-
-
-
-
 let selected_user = null
 
 const buildTable = async function(tableID, data) {
@@ -82,12 +69,14 @@ const buildTable = async function(tableID, data) {
 
 const updateTableContent = (entity_id) => {
     console.log(entity_id)
-    document.getElementById('trainerID').value = entity_id[1];
+    document.getElementById('trainerID').selectedOptions[0].text  = entity_id[1];
+    document.getElementById('trainerID').setAttribute("disabled", "true")
     document.getElementById('activity').value = entity_id[2];
     document.getElementById('activityDays').value = entity_id[3];
     document.getElementById('startTime').value = entity_id[4];
     document.getElementById('duration').value = entity_id[5];
-    document.getElementById('locationID').value = entity_id[6];
+    document.getElementById('locationID').selectedOptions[0].text  = entity_id[6];
+    document.getElementById('locationID').setAttribute("disabled", "true")
   
     
 
@@ -101,7 +90,7 @@ const updateTableContent = (entity_id) => {
         e.preventDefault();
         
         const formData = new FormData(customerForm).entries()
-        console.log(formData)
+        
         const response = await fetch(`https://planetfitapi.azurewebsites.net/api/schedules/${selected_user}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -109,7 +98,7 @@ const updateTableContent = (entity_id) => {
         });
     
         const result = await response.json();
-    
+        console.log(formData)
         console.log(result)
     
         const modalElement = document.getElementById("customerModal");
@@ -151,6 +140,15 @@ const onClose = function(){
     const modalElement = document.getElementById("customerModal");
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
+
+    document.getElementById('trainerID').removeAttribute("disabled")
+    document.getElementById('trainerID').selectedOptions[0].text = "Choose From"
+
+    document.getElementById('locationID').removeAttribute("disabled")
+    document.getElementById('locationID').selectedOptions[0].text = "Choose From"
+    
+    
+   
   
     document.getElementById("addCustomer").reset()
 
@@ -197,7 +195,7 @@ const postCustomer = () => {
         const modal = bootstrap.Modal.getInstance(modalElement);
         modal.hide();
         document.getElementById("addCustomer").reset()
-        location.reload()
+        //location.reload()
         
     });
 }

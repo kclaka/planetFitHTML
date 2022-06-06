@@ -42,16 +42,9 @@ let selected_user = null
 const buildTable = async function(tableID, data) {
     
     for(var values of data){
-        let url = `https://planetfitapi.azurewebsites.net/api/customers/${values["CustomerID"]}`
-        let response = await fetch(url);
-        values["CustomerID"] = await response.json()
-
-        values["CustomerID"] = values["CustomerID"][0]["fname"] + " " + values["CustomerID"][0]["lname"]
+        
         values["amount"] = parseFloat(values["amount"]).toFixed(2)
-        
-        
-        
-        
+       
         let newRow = tableID.insertRow();
         for(key in values){
             
